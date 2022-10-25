@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 class UserModel {
@@ -63,11 +61,6 @@ class UserModel {
       awards: List<String>.from(map['awards']),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source));
 
   @override
   String toString() {
