@@ -44,7 +44,7 @@ class AuthRepository {
       );
 
       final userCredential = await _auth.signInWithCredential(credential);
-      late UserModel userModel;
+       UserModel userModel;
       if (userCredential.additionalUserInfo!.isNewUser) {
         userModel = UserModel(
           name: userCredential.user!.displayName ?? 'User',
@@ -56,6 +56,8 @@ class AuthRepository {
           awards: [],
         );
         await _users.doc(userCredential.user!.uid).set(userModel.toMap());
+      } else {
+        userModel = await getUserData(userCredential.user!.uid).first;
       }
       return right(userModel);
     } on FirebaseException catch (e) {
@@ -63,5 +65,11 @@ class AuthRepository {
     } catch (e) {
       return left(Failure(e.toString()));
     }
+  }
+
+  Stream<UserModel> getUserData(String uid) {
+    return _users.doc(uid).snapshots().map(
+          (event) => UserModel.fromMap(event.data() as Map<String, dynamic>),
+        );
   }
 }
