@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CreateCommunityScreen extends ConsumerStatefulWidget {
+class CreateCommunityScreen extends StatefulHookConsumerWidget {
   const CreateCommunityScreen({super.key});
 
   @override
@@ -12,6 +12,7 @@ class CreateCommunityScreen extends ConsumerStatefulWidget {
 class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
   @override
   Widget build(BuildContext context) {
+    // final communityNameController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create a Community'),
@@ -20,9 +21,21 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: const [
-            Text("Community name"),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text("Community name"),
+            ),
             SizedBox(
               height: 10,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                hintText: "r/Community_name",
+                filled: true,
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(18),
+              ),
+              maxLength: 21,
             ),
           ],
         ),
