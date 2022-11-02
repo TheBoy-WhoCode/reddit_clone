@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CreateCommunityScreen extends StatefulHookConsumerWidget {
@@ -12,7 +13,7 @@ class CreateCommunityScreen extends StatefulHookConsumerWidget {
 class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
   @override
   Widget build(BuildContext context) {
-    // final communityNameController = useTextEditingController();
+    final communityNameController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create a Community'),
@@ -20,16 +21,17 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
-          children: const [
-            Align(
+          children: [
+            const Align(
               alignment: Alignment.topLeft,
               child: Text("Community name"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextField(
-              decoration: InputDecoration(
+              controller: communityNameController,
+              decoration: const InputDecoration(
                 hintText: "r/Community_name",
                 filled: true,
                 border: InputBorder.none,
@@ -37,6 +39,24 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
               ),
               maxLength: 21,
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: const Text(
+                "Create Community",
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            )
           ],
         ),
       ),
